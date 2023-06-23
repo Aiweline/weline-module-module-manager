@@ -1,27 +1,24 @@
 <?php
-
 declare(strict_types=1);
 
 /*
  * 本文件由 秋枫雁飞 编写，所有解释权归Aiweline所有。
+ * 作者：Admin
  * 邮箱：aiweline@qq.com
  * 网址：aiweline.com
  * 论坛：https://bbs.aiweline.com
+ * 日期：2023/6/23 09:23:12
  */
 
-namespace Weline\ModuleManager\Observer;
+namespace Weline\ModuleManager\Plugin;
 
 use Weline\Framework\App\Env;
-use Weline\Framework\Event\Event;
 use Weline\Framework\Manager\ObjectManager;
 use Weline\ModuleManager\Model\Module;
 
-class UpgradeModule implements \Weline\Framework\Event\ObserverInterface
+class ModuleUpgradeExecuteAfterPlugin
 {
-    /**
-     * @inheritDoc
-     */
-    public function execute(Event $event)
+    function afterExecute($object, $result)
     {
         # 获取modules
         $modules = (include Env::path_MODULES_FILE) ?? [];
