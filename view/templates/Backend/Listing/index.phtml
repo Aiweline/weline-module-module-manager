@@ -149,7 +149,7 @@ $themeConfig = \Weline\Framework\Manager\ObjectManager::getInstance(\Weline\Back
                                                 <td>
                                                     <string>$module->getDescription()|50</string>
                                                 </td>
-                                                <td @if{$module->getPosition() ==='system'=>"class='disabled text-danger'"}>
+                                                <td @if{$module->getPosition() === 'system'=>"class='disabled text-danger'"}>
                                                     <if condition="module.position === 'app'">
                                                         <lang>第三方</lang>
                                                         <elseif condition="module.position === 'composer'"/>
@@ -169,7 +169,7 @@ $themeConfig = \Weline\Framework\Manager\ObjectManager::getInstance(\Weline\Back
                                                     <input class='form-check form-switch' type='checkbox'
                                                            alt="@var{$module->getStatus()?__('开启'):__('关闭')}"
                                                            id='@var{$module->getName()}' switch='bool' @if{$module->getStatus()=>'checked'}
-                                                    @if{$module->getPosition()==='system'=>'disabled'}>
+                                                    @if{$module->getPosition() === 'system'=>'disabled'}>
                                                     <label class='form-label' for='@var{$module->getName()}'
                                                            data-on-label='<?= __('开启') ?>'
                                                            data-off-label='<?= __('关闭') ?>'>
@@ -201,7 +201,7 @@ $themeConfig = \Weline\Framework\Manager\ObjectManager::getInstance(\Weline\Back
                     <div class="col-sm-6">
                         <div class="text-sm-end d-none d-sm-block">
                             Crafted with <i class="mdi mdi-heart text-danger"></i> By <a
-                                    href="https://www.aiweline.com/">秋枫雁飞(aiweline)</a>
+                                href="https://www.aiweline.com/">秋枫雁飞(aiweline)</a>
                         </div>
                     </div>
                 </div>
