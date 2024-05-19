@@ -28,7 +28,8 @@ class ModelUpdateAfter implements ObserverInterface
         $data = $event->getData('data');
         /**@var Model $model */
         $model = $data->getModel();
-        if ($model::class !== Table::class and $type === 'install') {
+
+        if ($model::class !== Table::class) {
             $this->table->reset();
             /**@var Module $module */
             $module = $event->getData('module');
@@ -36,13 +37,14 @@ class ModelUpdateAfter implements ObserverInterface
             try {
                 $table = $model->getTable();
                 /**@var Table $modelTable */
-                $this->table->clear()
+                $this->table->clearData()
+                    ->reset()
                     ->setData($this->table::fields_module_name, $module->getName())
-                    ->setData($this->table::fields_name, $table)
-                    ->setData($this->table::fields_model, $model::class)
+                    ->setData($this->table::fields_name, $table,true)
+                    ->setData($this->table::fields_model, $model::class,true)
                     ->save(true);
             } catch (\Exception $exception) {
-
+                d($exception->getMessage());
             }
         }
     }

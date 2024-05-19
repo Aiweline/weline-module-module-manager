@@ -29,6 +29,9 @@ class Module extends \Weline\Framework\Database\Model
     public const fields_LAST_VERSION   = 'last_version';
     public const fields_ROUTER         = 'router';
 
+    public array $_index_sort_keys = [self::fields_ID, self::fields_NAME];
+    public array $_unit_unique_fields = [self::fields_ID, self::fields_NAME];
+
     /**
      * @inheritDoc
      */
