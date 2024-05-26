@@ -28,12 +28,12 @@ class ModuleUpgradeExecuteAfterPlugin
         $moduleModel->query("truncate table {$moduleModel->getTable()}");
         # 写入数据库
         foreach ($modules as $module) {
-            $module['base_path']   = str_replace(BP, '', $module['base_path']);
+            $module['base_path'] = str_replace(BP, '', $module['base_path']);
             $module['description'] = htmlspecialchars($module['description']);
-            $module['status']      = $module['status'] ? 1 : 0;
+            $module['status'] = $module['status'] ? 1 : 0;
             $moduleModel->clearData()
-                        ->setData($module)
-                        ->save();
+                ->setModelFieldsData($module)
+                ->save(true, Module::fields_NAME);
         }
     }
 }
