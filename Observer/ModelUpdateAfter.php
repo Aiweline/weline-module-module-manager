@@ -15,7 +15,8 @@ class ModelUpdateAfter implements ObserverInterface
 
     public function __construct(
         Table $table
-    ) {
+    )
+    {
         $this->table = $table;
     }
 
@@ -28,21 +29,25 @@ class ModelUpdateAfter implements ObserverInterface
         $data = $event->getData('data');
         /**@var Model $model */
         $model = $data->getModel();
-        if ($model::class !== Table::class and $type === 'install') {
-            $this->table->reset();
+        if ($model::class !== Table::class) {
+            $this->table->reset()->clearData();
             /**@var Module $module */
             $module = $event->getData('module');
             # 检查是否存在表
             try {
                 $table = $model->getTable();
-                /**@var Table $modelTable */
-                $this->table->clear()
+                /**@var Table $has */
+                $has = $this->table->where($this->table::fields_name, $table)->find()->fetch();
+                if ($has->getId()) {
+                    throw new Exception($table . __('表已存在！该表已被：%1 模组下的 %2 模型创建，请为当前模型 %3 更换表名。', [$has->getModuleName(), $has->getModel(), $model::class]));
+                }
+                $this->table->reset()->clearData()
                     ->setData($this->table::fields_module_name, $module->getName())
-                    ->setData($this->table::fields_name, $table)
+                    ->setData($this->table::fields_name, $table, true)
                     ->setData($this->table::fields_model, $model::class)
-                    ->save(true);
+                    ->save();
             } catch (\Exception $exception) {
-
+//                d($exception->getMessage());
             }
         }
     }
