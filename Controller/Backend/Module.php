@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Weline\ModuleManager\Controller\Backend;
 
-use Weline\CacheManager\Console\Cache\Clear;
+use Weline\Framework\Cache\Console\Cache\Clear;
 use Weline\Framework\App\Env;
 use Weline\Framework\Manager\ObjectManager;
 use Weline\Framework\Module\Console\Module\Upgrade;
