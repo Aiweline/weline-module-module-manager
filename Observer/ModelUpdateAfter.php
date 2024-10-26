@@ -44,7 +44,7 @@ class ModelUpdateAfter implements ObserverInterface
             $this->table->reset()->clearData()
                 ->setData($this->table::fields_module_name, $module->getName())
                 ->setData($this->table::fields_name, $table, true)
-                ->setData($this->table::fields_model, $model::class)
+                ->setData($this->table::fields_model, $model::class, true)
                 ->save();
         }
     }
